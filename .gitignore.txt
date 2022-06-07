@@ -1,0 +1,11 @@
+.idea/
+**/__pycache__/
+env/
+venv/
+.env
+.venv
+*.log
+*.xml
+*.pyc
+*.tmp
+*.sqlite3
