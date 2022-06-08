@@ -69,8 +69,8 @@ WSGI_APPLICATION = 'curr_scraper.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'DATABASE_URL': os.environ.get('DATABASE_URL'),
     }
 }
 
