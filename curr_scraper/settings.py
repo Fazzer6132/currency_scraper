@@ -69,17 +69,9 @@ WSGI_APPLICATION = 'curr_scraper.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASE_URL = os.environ.get('DATABASE_URL')
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': os.environ.get('DATABASE_HOST'),
-        'NAME': os.environ.get('DATABASE_NAME'),
-        'USER': os.environ.get('DATABASE_USER'),
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        'ATOMIC_REQUESTS': True,
-    }
-}
-ATOMIC_REQUESTS = True
+DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
+DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
