@@ -1,5 +1,6 @@
 import os
 import sys
+import dj_database_url
 from pathlib import Path
 
 
@@ -67,13 +68,18 @@ WSGI_APPLICATION = 'curr_scraper.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+DATABASE_URL = os.environ.get('DATABASE_URL')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'DATABASE_URL': os.environ.get('DATABASE_URL'),
+        'HOST': os.environ.get('DATABASE_HOST'),
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'ATOMIC_REQUESTS': True,
     }
 }
-ATOMIC_REQUESTS = True 
+ATOMIC_REQUESTS = True
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
