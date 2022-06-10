@@ -1,9 +1,13 @@
 from django.db import models
 
 
+class Currency(models.Model):
+    code = models.TextField()
+    description = models.TextField()
+
+
 class RateRecord(models.Model):
-    timestamp = models.DateTimeField('Date of record')
-    UAHrate = models.FloatField('UAH to USD')
-    GBPrate = models.FloatField('GBP to USD')
-    EURrate = models.FloatField('EUR to USD')
-    PLNrate = models.FloatField('PLN to USD')
+    timestamp = models.TimeField()
+    currency = models.ForeignKey(Currency, on_delete=models.PROTECT)
+    base_currency = models.ForeignKey(Currency, on_delete=models.PROTECT)
+    rate = models.FloatField()
