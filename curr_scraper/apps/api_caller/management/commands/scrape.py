@@ -1,13 +1,13 @@
-from django.core.management.base import BaseCommand
-from api_caller.models import RateRecord
-from dotenv import load_dotenv
-from datetime import datetime
-import requests
-import os
 import json
-import pytz
+import os
+from datetime import datetime
 
-load_dotenv()
+import pytz
+import requests
+from .api_caller import call_logic
+from django.core.management.base import BaseCommand
+
+
 
 
 class Command(BaseCommand):
@@ -15,25 +15,5 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         pass
 
-    help = 'Scrapes openexchangerates for currency rates.'
-    url = os.environ.get("URL")
-    timestamp = None
-    try:
-        response = requests.get(url)
-        json_data = json.loads(response.text)
-        timestamp = json_data["timestamp"]
-        rates = json_data["rates"]
-    except KeyError:
-        # send error to sentry
-        print("Key Error")
-    else:
-        UAH = rates["UAH"]
-        GBP = rates["GBP"]
-        PLN = rates["PLN"]
-        EUR = rates["EUR"]
+    call_logic.scrape_data()
 
-    if timestamp is not None:
-        tz = pytz.timezone("Europe/Kiev")
-        timestampz = datetime.fromtimestamp(timestamp, tz)
-        record = RateRecord(timestamp=timestampz, UAHrate=UAH, GBPrate=GBP, PLNrate=PLN, EURrate=EUR)
-        record.save()

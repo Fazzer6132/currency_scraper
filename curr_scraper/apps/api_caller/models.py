@@ -6,8 +6,8 @@ class Currency(models.Model):
     description = models.TextField()
 
 
-class RateRecord(models.Model):
+class CurrencyRateRecord(models.Model):
     timestamp = models.TimeField()
-    currency = models.ForeignKey(Currency, on_delete=models.PROTECT)
-    base_currency = models.ForeignKey(Currency, on_delete=models.PROTECT)
+    curr = models.ForeignKey(Currency, on_delete=models.PROTECT, related_name='%(class)s_currency')
+    base_curr = models.ForeignKey(Currency, on_delete=models.PROTECT, related_name='%(class)s_base_currency')
     rate = models.FloatField()
