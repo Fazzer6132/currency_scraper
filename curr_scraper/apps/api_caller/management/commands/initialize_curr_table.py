@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
-from .api_caller import call_logic
+from curr_scraper.apps.api_caller import call_logic
+
 
 class Command(BaseCommand):
 

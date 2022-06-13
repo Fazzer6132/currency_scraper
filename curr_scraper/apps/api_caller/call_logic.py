@@ -3,7 +3,7 @@ from datetime import datetime
 import json
 import pytz
 import requests
-import models
+import curr_scraper.apps.api_caller.models as models
 
 def call_api():
     oe_url = os.environ.get('OPEN_EXCHANGE_URL')
