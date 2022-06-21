@@ -6,6 +6,7 @@ class Currency(models.Model):
     description = models.TextField()
 
 
+
 class CurrencyRateRecord(models.Model):
     timestamp = models.TimeField()
     curr = models.ForeignKey(Currency, on_delete=models.PROTECT, related_name='%(class)s_currency')

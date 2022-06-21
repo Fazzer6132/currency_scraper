@@ -3,7 +3,8 @@ from datetime import datetime
 import json
 import pytz
 import requests
-import curr_scraper.apps.api_caller.models as models
+from curr_scraper.apps.api_caller.models import Currency, CurrencyRateRecord
+
 
 def call_api():
     oe_url = os.environ.get('OPEN_EXCHANGE_URL')
@@ -24,7 +25,7 @@ def initialize_currency_table():
     rates = json_data["rates"]
     curr_list = rates.keys()
     for currency in curr_list:
-        cr = models.Currency(code=currency, description=currency)
+        cr = Currency(code=currency, description=currency)
         cr.save()
 
 

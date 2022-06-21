@@ -1,10 +1,4 @@
-import json
-import os
-from datetime import datetime
-
-import pytz
-import requests
-from .api_caller import call_logic
+from curr_scraper.apps.api_caller import call_logic
 from django.core.management.base import BaseCommand
 
 
