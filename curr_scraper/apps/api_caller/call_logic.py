@@ -1,9 +1,11 @@
+import json
 import os
 from datetime import datetime
-import json
+
 import pytz
 import requests
-from curr_scraper.apps.api_caller.models import Currency, CurrencyRateRecord
+
+from api_caller import models
 
 
 def call_api():
@@ -25,7 +27,7 @@ def initialize_currency_table():
     rates = json_data["rates"]
     curr_list = rates.keys()
     for currency in curr_list:
-        cr = Currency(code=currency, description=currency)
+        cr = models.Currency(code=currency, description=currency)
         cr.save()
 
 
@@ -45,6 +47,8 @@ def scrape_data(base_currency):
         return
     tz = pytz.timezone("Europe/Kiev")
     timestampz = datetime.fromtimestamp(timestamp, tz)
+
+
 
         
 
