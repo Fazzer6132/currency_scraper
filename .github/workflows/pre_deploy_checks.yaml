@@ -25,4 +25,4 @@ jobs:
           max-line-length: '79'
           plugins: 'flake8-bugbear==22.1.11'
           args: '--max-complexity 8'
-          exclude: 'migrations,.github'
+          exclude: 'migrations'
