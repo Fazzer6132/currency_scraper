@@ -14,14 +14,14 @@ jobs:
           python-version: '3.10.4'
           architecture: 'x64'
       - name: Get changed files
-        id: changed-files-comma
+        id: changed-files
         with:
-          separator: ', '
+          separator: ' '
         uses: tj-actions/changed-files@v23
       - name: flake8 Lint
         uses: py-actions/flake8@v2
         with:
-          path: ${{ steps.changed-files-comma.outputs.all_changed_files }}
+          path: ${{ steps.changed-files.outputs.all_changed_files }}
           max-line-length: '79'
           plugins: "flake8-bugbear==22.1.11"
           args: '--max-complexity 8'
