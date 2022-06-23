@@ -6,9 +6,9 @@ from sentry_sdk.integrations.django import DjangoIntegration
 from pathlib import Path
 
 
-dsn_key = os.environ.get('SENTRY_DSN_KEY')
+DSN_KEY = os.environ.get('SENTRY_DSN_KEY')
 sentry_sdk.init(
-    dsn=dsn_key,
+    dsn=DSN_KEY,
     integrations=[DjangoIntegration()],
     traces_sample_rate=1.0,
     send_default_pii=True
