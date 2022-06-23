@@ -1,7 +1,9 @@
 import os
 import sys
+
 import dj_database_url
 import sentry_sdk
+
 from sentry_sdk.integrations.django import DjangoIntegration
 from pathlib import Path
 
