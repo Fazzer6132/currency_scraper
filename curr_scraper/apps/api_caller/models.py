@@ -11,9 +11,10 @@ class Currency(models.Model):
 
 class CurrencyRateRecord(models.Model):
     timestamp = models.TimeField()
-    curr = models.ForeignKey(Currency, on_delete=models.PROTECT, related_name='%(class)s_currency')
-    base_curr = models.ForeignKey(Currency, on_delete=models.PROTECT, related_name='%(class)s_base_currency')
-    rate = models.FloatField()
+    curr = models.ForeignKey(Currency, on_delete=models.PROTECT, related_name='currency_name_records_currency')
+    base_curr = models.ForeignKey(Currency, on_delete=models.PROTECT,
+                                  related_name='currency_name_records_base_currency')
+    rate = models.DecimalField()
 
     class Meta:
         app_label = "api_caller"
