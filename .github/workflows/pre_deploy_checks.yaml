@@ -13,6 +13,9 @@ jobs:
         with:
           python-version: '3.10.4'
           architecture: 'x64'
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v23
       - name: flake8 Lint
         uses: py-actions/flake8@v2
         with:
