@@ -64,7 +64,7 @@ def scrape_data(base_currency="USD"):
         base_currency_id = c_list.filter(code=base_currency).first()
         for currency in curr_list:
             currency_id = c_list.filter(code=currency).first()
-            curr_rate_record = models.CurrencyRateRecord(timedate=timestampz, curr=currency_id, base_curr=base_currency_id, rate=rates[currency])
+            curr_rate_record = models.CurrencyRateRecord(curr=currency_id, base_curr=base_currency_id, rate=rates[currency])
             curr_rate_record.save()
 
 
