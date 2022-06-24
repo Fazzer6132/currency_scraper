@@ -1,8 +1,6 @@
 import json
-import pytz
 import requests
 
-from datetime import datetime
 from django.conf import settings
 from api_caller import models
 
@@ -62,8 +60,6 @@ def scrape_data(base_currency="USD"):
         else:
             print("Currency not found")
             return
-        tz = pytz.timezone("Europe/Kiev")
-        timestampz = datetime.fromtimestamp(timestamp, tz)
         c_list = models.Currency.objects.all()
         base_currency_id = c_list.filter(code=base_currency).first()
         for currency in curr_list:
