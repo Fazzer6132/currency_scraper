@@ -10,8 +10,8 @@ from api_caller import models
 
 def call_api():
     """Make a call to API, check response, and return json data. Return None if was not able to fetch a valid JSON"""
-    oe_url = settings.OPEN_EXCHANGE_URL
-    oe_app_id = settings.OPEN_EXCHANGE_APP_ID
+    oe_url = settings.OE_URL
+    oe_app_id = settings.OE_APP_ID
     oe_complete_url = f'{oe_url}/latest.json?app_id={oe_app_id}'
     try:
         response = requests.get(oe_complete_url)
@@ -35,6 +35,7 @@ def call_api():
         return json_data
     return None
 
+
 def initialize_currency_table():
     """Take json data and initialize the currency table with currency codes"""
     json_data = call_api()
@@ -42,28 +43,28 @@ def initialize_currency_table():
         rates = json_data["rates"]
         curr_list = rates.keys()
         for currency in curr_list:
-            cr = models.Currency(code=currency, description=currency)
-            cr.save()
+            cr = models.Currency.objects.get_or_create(code=currency, description=currency)
 
 
 def scrape_data(base_currency="USD"):
     """Take json data and populate currency rate table with new info"""
     json_data = call_api()
-    timestamp = json_data["timestamp"]
-    rates = json_data["rates"]
-    curr_list = rates.keys()
-    if base_currency == "USD":
-        pass
-    elif base_currency in curr_list:
-        base_rate = curr_list[base_currency]
-        for currency in curr_list:
-            rates[currency] = rates[currency]/base_currency
-    else:
-        print("Currency not found")
-        return
-    tz = pytz.timezone("Europe/Kiev")
-    timestampz = datetime.fromtimestamp(timestamp, tz)
-
+    if json_data:
+        timestamp = json_data["timestamp"]
+        rates = json_data["rates"]
+        curr_list = rates.keys()
+        if base_currency == "USD":
+            pass
+        elif base_currency in curr_list:
+            base_rate = curr_list[base_currency]
+            for currency in curr_list:
+                rates[currency] = rates[currency]/base_currency
+        else:
+            print("Currency not found")
+            return
+        tz = pytz.timezone("Europe/Kiev")
+        timestampz = datetime.fromtimestamp(timestamp, tz)
+        
 
 
         
