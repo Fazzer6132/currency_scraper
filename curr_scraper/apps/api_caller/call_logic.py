@@ -56,15 +56,20 @@ def scrape_data(base_currency="USD"):
         if base_currency == "USD":
             pass
         elif base_currency in curr_list:
-            base_rate = curr_list[base_currency]
+            base_rate = rates[base_currency]
             for currency in curr_list:
-                rates[currency] = rates[currency]/base_currency
+                rates[currency] = rates[currency]/base_rate
         else:
             print("Currency not found")
             return
         tz = pytz.timezone("Europe/Kiev")
         timestampz = datetime.fromtimestamp(timestamp, tz)
-        
+        c_list = models.Currency.objects.all()
+        base_currency_id = c_list.filter(code=base_currency).first()
+        for currency in curr_list:
+            currency_id = c_list.filter(code=currency).first()
+            curr_rate_record = models.CurrencyRateRecord(timedate=timestampz, curr=currency_id, base_curr=base_currency_id, rate=rates[currency])
+            curr_rate_record.save()
 
 
         
