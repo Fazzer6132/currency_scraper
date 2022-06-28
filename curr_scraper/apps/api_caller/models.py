@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 class AbstractCreatedUpdatedModel(models.Model):
     """An abstract class that has info on when the entity was created and updated"""
-    dtime_created = models.DateTimeField(auto_add_now=True)
+    dtime_created = models.DateTimeField(auto_now_add=True)
     dtime_updated = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -24,7 +24,6 @@ class Currency(AbstractCreatedUpdatedModel):
 
 class CurrencyRateRecord(AbstractCreatedUpdatedModel):
     """A model describing a singular record of conversion rate of a particular currency in terms of base currency."""
-    timedate = models.DateTimeField(auto_now_add=True)
     curr = models.ForeignKey(Currency, on_delete=models.PROTECT, related_name='currency_rate_records',
                              verbose_name=_(u'Currency'))
     base_curr = models.ForeignKey(Currency, on_delete=models.PROTECT,
