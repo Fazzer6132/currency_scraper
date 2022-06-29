@@ -11,5 +11,5 @@ urlpatterns = [
     path('sentry-debug/', trigger_error),
     path('health-check/', views.check_health),
     path('currencies/', views.get_currencies),
-    path('currency-rates/', views.get_rates)
+    path('currency-rates', views.CurrencyRateView.as_view())
 ]

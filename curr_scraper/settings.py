@@ -2,7 +2,6 @@ import os
 import sys
 import dj_database_url
 import sentry_sdk
-import rest_framework
 from sentry_sdk.integrations.django import DjangoIntegration
 from pathlib import Path
 
@@ -50,7 +49,8 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    'rest_framework'
+    'rest_framework',
+    'django_filters'
 ]
 
 LOCAL_APPS = [
