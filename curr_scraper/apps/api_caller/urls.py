@@ -8,8 +8,8 @@ def trigger_error(request):
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('sentry-debug/', trigger_error),
-    path('health-check/', views.check_health),
-    path('currencies/', views.get_currencies),
+    path('sentry-debug', trigger_error),
+    path('health-check', views.CheckHealth.as_view()),
+    path('currencies', views.CurrencyView.as_view()),
     path('currency-rates', views.CurrencyRateView.as_view())
 ]
