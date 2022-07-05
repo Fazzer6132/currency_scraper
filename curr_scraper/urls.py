@@ -15,8 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+from curr_scraper.apps.api_caller.api.v1.views import CurrencyView, CurrencyRateView
+from curr_scraper import views
 
+
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
+
+router = routers.DefaultRouter()
+router.register('currencies', CurrencyView)
+router.register('currency_rates', CurrencyRateView)
 urlpatterns = [
-    path('api_caller/', include('api_caller.urls')),
+    path('health-check', views.CheckHealth.as_view()),
     path('admin/', admin.site.urls),
+    path('sentry-debug', trigger_error),
+    path('api/v1/', include(router.urls))
 ]
