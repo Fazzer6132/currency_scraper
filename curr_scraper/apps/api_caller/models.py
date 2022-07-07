@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class AbstractCreatedUpdatedModel(models.Model):
-    """An abstract class that has info on when the entity was created and updated"""
+    """An abstract class that has info on when the entity was created and updated."""
     dtime_created = models.DateTimeField(auto_now_add=True)
     dtime_updated = models.DateTimeField(auto_now=True)
 
