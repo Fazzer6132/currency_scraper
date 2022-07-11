@@ -21,6 +21,9 @@ class Currency(AbstractCreatedUpdatedModel):
         verbose_name = "currency"
         verbose_name_plural = "currencies"
 
+    def __str__(self):
+        return self.code
+
 
 class CurrencyRateRecord(AbstractCreatedUpdatedModel):
     """A model describing a singular record of conversion rate of a particular currency in terms of base currency."""
@@ -34,3 +37,6 @@ class CurrencyRateRecord(AbstractCreatedUpdatedModel):
         app_label = "api_caller"
         verbose_name = "currency rate record"
         verbose_name_plural = "currency rate records"
+
+    def __str__(self):
+        return f'{self.curr.code} to {self.base_curr.code}'
