@@ -31,5 +31,7 @@ urlpatterns = [
     path('health-check', views.CheckHealth.as_view()),
     path('admin/', admin.site.urls),
     path('sentry-debug', trigger_error),
-    path('api/v1/', include(router.urls))
+    path('api/v1/', include(router.urls)),
+    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider'))
 ]
+
