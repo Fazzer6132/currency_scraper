@@ -5,6 +5,7 @@ from django_filters import filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticated
 
 from curr_scraper.apps.api_caller.api.v1.serializers import CurrencySerializer, CurrencyRateRecordSerializer
 
@@ -18,6 +19,7 @@ class CurrencyView(viewsets.ModelViewSet):
     """Get a list of all currencies."""
     queryset = Currency.objects.all()
     serializer_class = CurrencySerializer
+    permission_classes = [IsAuthenticated]
 
 
 class RatesPagination(PageNumberPagination):
@@ -47,6 +49,7 @@ class CurrencyRateView(viewsets.ModelViewSet):
     filterset_class = RatesFilter
     serializer_class = CurrencyRateRecordSerializer
     pagination_class = RatesPagination
+    permission_classes = [IsAuthenticated]
 
 
 
